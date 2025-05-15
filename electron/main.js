@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const fs = require('fs');
+const { copyFileToDownloads } = require('./fileUtils');
 
 // Check if we're in development mode
 const isDev = process.env.NODE_ENV === 'development';
@@ -12,14 +14,12 @@ let mainWindow = null;
  */
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 400,
+    width: 800,
     height: 600,
-    resizable: false,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
-      // Disable remote module for security
-      enableRemoteModule: false
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
@@ -49,19 +49,25 @@ function createWindow() {
 }
 
 // Create window when Electron is ready
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
 
-// Quit when all windows are closed
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.on('activate', function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
 });
 
-// Recreate window on macOS when dock icon is clicked
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
+// Quit when all windows are closed
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') app.quit();
+});
+
+// Handle file copy operation
+ipcMain.handle('copy-file', async (event, sourcePath) => {
+  try {
+    return await copyFileToDownloads(sourcePath);
+  } catch (error) {
+    throw new Error(`Failed to copy file: ${error.message}`);
   }
 });
 

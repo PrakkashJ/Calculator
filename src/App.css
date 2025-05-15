@@ -1,0 +1,13 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--app-bg, #f0f0f0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .app {
+    --app-bg: #1a1a1a;
+  }
+} 
