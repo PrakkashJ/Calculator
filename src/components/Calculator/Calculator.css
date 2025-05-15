@@ -1,0 +1,118 @@
+.calculator {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--calculator-bg, #1a1a1a);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.display {
+  background: var(--display-bg, #2d2d2d);
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.equation {
+  color: var(--equation-color, #888);
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  min-height: 1.5em;
+}
+
+.current {
+  color: var(--current-color, #fff);
+  font-size: 2rem;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+button {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: var(--button-bg, #333);
+  color: var(--button-color, #fff);
+  transition: background-color 0.2s;
+  padding: 15px;
+}
+
+button:hover {
+  background: var(--button-hover, #444);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.operator {
+  background: var(--operator-bg, #4a4a4a);
+  color: var(--operator-color, #fff);
+}
+
+.operator:hover {
+  background: var(--operator-hover, #5a5a5a);
+}
+
+.equals {
+  background: var(--equals-bg, #0066cc);
+  color: var(--equals-color, #fff);
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+.equals:hover {
+  background: var(--equals-hover, #0077ee);
+}
+
+.zero {
+  grid-column: span 2;
+  aspect-ratio: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --calculator-bg: #1a1a1a;
+    --display-bg: #2d2d2d;
+    --equation-color: #888;
+    --current-color: #fff;
+    --button-bg: #333;
+    --button-color: #fff;
+    --button-hover: #444;
+    --operator-bg: #4a4a4a;
+    --operator-color: #fff;
+    --operator-hover: #5a5a5a;
+    --equals-bg: #0066cc;
+    --equals-color: #fff;
+    --equals-hover: #0077ee;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --calculator-bg: #f0f0f0;
+    --display-bg: #fff;
+    --equation-color: #666;
+    --current-color: #000;
+    --button-bg: #e0e0e0;
+    --button-color: #000;
+    --button-hover: #d0d0d0;
+    --operator-bg: #f8f8f8;
+    --operator-color: #0066cc;
+    --operator-hover: #e8e8e8;
+    --equals-bg: #0066cc;
+    --equals-color: #fff;
+    --equals-hover: #0077ee;
+  }
+} 
