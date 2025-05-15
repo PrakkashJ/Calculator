@@ -7,6 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "electron:dev": "concurrently \"npm run dev\" \"wait-on tcp:5173 && cross-env NODE_ENV=development electron electron/main.js\"",
+    "electron:start": "cross-env NODE_ENV=development electron electron/main.js",
     "electron:build": "vite build && electron-builder"
   },
   "dependencies": {
